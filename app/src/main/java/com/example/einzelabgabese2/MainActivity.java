@@ -8,6 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,28 +25,43 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ;
+        setContentView(R.layout.content_main);
+
+        final Button testen = findViewById(R.id.Testen);
+        testen.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                EditText matrikelNr = (EditText)findViewById(R.id.editText4);
+                TextView ergebnis = (TextView)findViewById((R.id.Ergebnis));
+
+                String a = matrikelNr.getText().toString();
+                int erg = 0;
+
+                for (int i = 0; i < a.length(); i++){
+                    erg = erg + Integer.parseInt(String.valueOf(a.charAt(i)));
+                }
+
+                if(erg%2==0){
+                    ergebnis.setText("Die Quersumme deiner Matrikelnummer ist gerade.");
+                }
+                else{
+                    ergebnis.setText("Die Quersumme deiner Matrikelnummer ist ungerade.");
+                }
+
+            }
+        });
+
+        final Button senden = findViewById(R.id.Senden);
+        senden.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
+
+
+
 }
