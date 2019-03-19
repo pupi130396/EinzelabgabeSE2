@@ -53,6 +53,21 @@ public class MainActivity extends AppCompatActivity {
         final Button senden = findViewById(R.id.Senden);
         senden.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                EditText eingabeFeld = (EditText)findViewById(R.id.editText4);
+                TextView erg = (TextView) findViewById((R.id.Ergebnis));
+                String matrikelNr = eingabeFeld.getText().toString();
+
+                TCPClient tcp = new TCPClient(matrikelNr);
+                tcp.start();
+
+                try{
+                    tcp.join();
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+
+                erg.setText(tcp.modifiedSentence);
 
             }
         });
